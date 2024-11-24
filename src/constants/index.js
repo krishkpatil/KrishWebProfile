@@ -18,6 +18,12 @@ export const EXPERIENCES = [
 
 export const PROJECTS = [
   {
+    title: "AI Product Listing Generator",
+    image: project5, // Replace with actual image path
+    description: `Developed an automatic product listing generator using OpenAI's DALL-E on Streamlit for the Sambhav Amazon Hackathon. The app leveraged AI to create product images and descriptions, streamlining the e-commerce listing process.`,
+    technologies: ["Streamlit", "OpenAI", "Python", "DALL-E"],
+  },
+  {
     title: "Preventing Confidential Data Leaks through Nudging",
     image: project1, // Replace with actual image path
     description: `Developed an NLP model designed to detect and prevent confidential data leaks by triggering nudges when sensitive information is identified. Leveraged the BERT transformer to enhance accuracy in identifying sensitive data, hosted on a cloud-based platform for real-time interaction and monitoring.`,
