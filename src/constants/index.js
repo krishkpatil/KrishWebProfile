@@ -2,6 +2,7 @@ import project1 from "../assets/projects/project-1.jpg";
 import project2 from "../assets/projects/project-2.jpg";
 import project3 from "../assets/projects/project-3.jpg";
 import project4 from "../assets/projects/project-4.jpg";
+import project5 from "../assets/projects/project-5.jpg";
 
 export const HERO_CONTENT = `Hi, I'm Krish, a recent Data Science graduate from the University of Exeter. I specialize in data analysis, statistical modeling, and machine learning. With hands-on experience in Python and SQL, I'm passionate about leveraging my technical skills to drive innovation and deliver impactful solutions.`;
 
