@@ -41,7 +41,7 @@ const Hero = () => {
           </motion.p>
           <motion.a
             href="https://docs.google.com/document/d/1i6hXZGWwQ_v2Ufdt8Tsfi4LaUh30OusNWg8ujfF-23g/export?format=pdf" // Direct PDF download link
-            download="Krish_Patil_CV.pdf"
+            download="Krish_Patil_DS.pdf"
             target="_blank"  // Open in new tab
             rel="noopener noreferrer"  // Security best practice
             variants={container(1.5)}
