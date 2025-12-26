@@ -1,58 +1,141 @@
-import project1 from "../assets/projects/project-1.jpg";
-import project2 from "../assets/projects/project-2.jpg";
-import project3 from "../assets/projects/project-3.jpg";
-import project4 from "../assets/projects/project-4.jpg";
-import project5 from "../assets/projects/project-5.jpg";
+import project3 from "../assets/projects/product_analyzer.png";
+import project1 from "../assets/projects/credit_udaan.png";
+import project2 from "../assets/projects/project-2.jpg"; // Placeholder for video
+import project4 from "../assets/projects/getflix.png";
+import project5 from "../assets/projects/deffy_funds.png";
 
-export const HERO_CONTENT = `Hi, I'm Krish, a recent Data Science graduate from the University of Exeter. I specialize in data analysis, statistical modeling, and machine learning. With hands-on experience in Python and SQL, I'm passionate about leveraging my technical skills to drive innovation and deliver impactful solutions.`;
+const GAMING_CAFE_VIDEO = "https://private-user-images.githubusercontent.com/70696384/417813001-d5d4f21e-b091-4fe7-af9f-4773287756f8.mp4?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NjY3NjI1NzksIm5iZiI6MTc2Njc2MjI3OSwicGF0aCI6Ii83MDY5NjM4NC80MTc4MTMwMDEtZDVkNGYyMWUtYjA5MS00ZmU3LWFmOWYtNDc3MzI4Nzc1NmY4Lm1wND9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTEyMjYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUxMjI2VDE1MTc1OVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWQ3Y2M5ZTQ1NWQ3ZGQ4NTRlMmM2MDRjY2M1NzhhMjRmNzQxN2UzMjQ0OTUzZDliMzc5MmUwZWViMGQ4OGY1MzQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.tJY5j6xHYDxttND_R3zeijRyZMGzRxkUIC9-iUtSh-w";
+
+export const HERO_CONTENT = `GenAI Engineer and Full-Stack AI/ML Developer with a Master's in Data Science from the University of Exeter. I specialize in building AI Agent monitoring platforms, HIPAA-compliant assistants, and real-time RAG systems. Passionate about leveraging cutting-edge AI to drive innovation and deliver impactful solutions.`;
 
 export const EXPERIENCES = [
   {
-    year: "March 2022 - Sept 2022",
-    role: "Data Science Intern",
-    company: "TCR Innovations",
-    description: `Collaborated closely with internal stakeholders to define project requirements and develop a predictive model focused on enhancing customer retention strategies. Utilized Python and SQL to analyze customer data, leading to a significant improvement in prediction accuracy. Streamlined data processing workflows using Python, automating repetitive tasks such as data cleaning, transformation, and integration, which increased efficiency and reduced manual intervention.`,
-    technologies: ["Python", "SQL", "Power BI", "Data Science"],
-  }
+    year: "April 2025 - Present",
+    role: "GenAI Engineer",
+    company: "NTT DATA, Mumbai",
+    description: `Led team developing AI Agent monitoring platform with real-time performance tracking, reducing model debugging cycles. Architected HIPAA-compliant multi-agent assistant with Redis context management and hybrid retrieval, processing 10K+ regulatory queries with 98% accuracy.`,
+    technologies: ["AI Agents", "Redis", "Hybrid Retrieval", "Python"],
+  },
+  {
+    year: "April 2022 - Jun 2022",
+    role: "ML Engineering Intern",
+    company: "TCR Innovation, Mumbai",
+    description: `Developed predictive retention model achieving 85% accuracy, preventing $50K monthly customer churn. Automated data processing pipelines with Python and SQL, reducing manual intervention by 60% and improving data quality.`,
+    technologies: ["Python", "SQL", "Machine Learning", "Data Pipelines"],
+  },
 ];
 
+export const EDUCATION = [
+  {
+    year: "Sept 2023 - Sept 2024",
+    degree: "Master of Science in Data Science with AI (Merit)",
+    institution: "University of Exeter, England, UK",
+    description: "Dissertation: Preventing confidential data leaks with NLP – achieved 40% reduction in data exposure. Advanced coursework: Machine Learning, Social Network Analysis, Text Processing with Python.",
+  },
+  {
+    year: "June 2019 - May 2023",
+    degree: "BE Electronics and Telecommunications Engineering (8.01/10 CGPA)",
+    institution: "Xavier Institute of Engineering, Mumbai, IND",
+    description: "Final-Year Project: Decentralised crowdfunding platform on Solana blockchain with smart contracts. Technical foundation: Data Structures (C++), Database Management (SQL), Deep Learning (Python).",
+  },
+];
 
 export const PROJECTS = [
   {
-    title: "AI Product Listing Generator",
-    image: project5, // Replace with actual image path
-    description: `Developed an automatic product listing generator using OpenAI's DALL-E on Streamlit for the Sambhav Amazon Hackathon. The app leveraged AI to create product images and descriptions, streamlining the e-commerce listing process.`,
-    technologies: ["Streamlit", "OpenAI", "Python", "DALL-E"],
+    title: "AI-Powered Product Analyzer",
+    subtitle: "Gen-AI E-Commerce Listing Generator",
+    image: project3,
+    description: "This generative AI tool transforms raw social media content into polished e-commerce listings in seconds, eliminating hours of manual product description writing.",
+    features: [
+      "Built an intelligent Instagram post analyzer using OpenAI Vision API for automated product feature extraction",
+      "Integrated DALL-E image generation to produce photorealistic product variations from source content",
+      "Engineered a multi-modal pipeline combining image analysis and natural language generation",
+      "Deployed a Streamlit interface enabling drag-and-drop image uploads and URL-based content ingestion",
+      "Optimized prompt engineering for consistent, high-quality e-commerce copy generation"
+    ],
+    techStack: ["Streamlit", "OpenAI API", "DALL-E", "GPT Vision", "Python"],
+    deepDive: "The system implements a two-stage RAG-inspired pipeline: Stage 1 uses GPT-4 Vision to analyze images. Stage 2 feeds this structured context into a fine-tuned prompt template.",
+    link: "https://github.com/krishkpatil/llms"
   },
   {
-    title: "Preventing Confidential Data Leaks through Nudging",
-    image: project1, // Replace with actual image path
-    description: `Developed an NLP model designed to detect and prevent confidential data leaks by triggering nudges when sensitive information is identified. Leveraged the BERT transformer to enhance accuracy in identifying sensitive data, hosted on a cloud-based platform for real-time interaction and monitoring.`,
-    technologies: ["Python", "NLP", "BERT", "Cloud"],
+    title: "Gaming Cafe Management System",
+    subtitle: "Full-Stack Operations Suite for Gaming Centers",
+    image: GAMING_CAFE_VIDEO,
+    isVideo: true,
+    description: "This enterprise-grade management platform eliminates manual tracking chaos in gaming cafes by automating session billing and real-time machine monitoring.",
+    features: [
+      "Developed real-time session tracking with automated billing calculations based on machine type and hourly rates",
+      "Implemented JWT-based authentication with role-based access control for Admin and User portals",
+      "Designed a dual-dashboard architecture enabling administrators to manage inventory while users track balances",
+      "Built RESTful APIs with Flask and SQLAlchemy ORM for efficient database operations",
+      "Styled the frontend with Chakra UI for a polished, accessible user interface"
+    ],
+    techStack: ["Flask", "SQLAlchemy", "SQLite", "React.js", "Chakra UI", "JWT"],
+    deepDive: "The backend employs SQLAlchemy's session management with optimistic locking to handle concurrent session updates. JWT tokens are signed with HS256 and include refresh token rotation for enhanced security.",
+    link: "https://github.com/krishkpatil/gaming-cafe"
   },
   {
-    title: "Optimising Genetic Algorithms for Complex Problems",
-    image: project2, // Replace with actual image path
-    description: `Contributed to the development and refinement of mutation strategies within Genetic Algorithms, enhancing solutions for complex multi-objective problems using large benchmark datasets. Analyzed datasets using Python to identify key trends and improve algorithm performance.`,
-    technologies: ["Python", "Genetic Algorithms", "NumPy", "Pandas"],
+    title: "Deffy Funds",
+    subtitle: "Deffy: Decentralized Solana Crowdfunding Ecosystem",
+    image: project5,
+    description: "Empowers creators to launch fundraising campaigns with 100% transparency while giving backers a trustless environment for global contributions.",
+    features: [
+      "Permissionless Campaign Creation: Users can architect and deploy custom fundraising campaigns directly to the blockchain",
+      "Trustless Contributions: Implements secure fund handling where backers can contribute SOL directly to campaign program addresses",
+      "Real-time Campaign Discovery: Features a dynamic dashboard for exploring active campaigns and tracking progress metrics",
+      "Wallet Integration: Seamless connection with Solana-compatible wallets (like Phantom) for one-click transactions"
+    ],
+    techStack: ["Solana", "Rust (Anchor)", "React.js", "Tailwind CSS", "Node.js"],
+    deepDive: "Built using Rust to manage campaign states as individual accounts on the Solana ledger. Leverages Anchor to simplify the interaction between the React frontend and on-chain programs.",
+    link: "https://github.com/SiddheshZagade/finaldeffy"
   },
   {
-    title: "COVID-19 Tracker Project",
-    image: project3, // Replace with actual image path
-    description: `Developed a COVID-19 tracking tool that integrated real-time data from the disease.sh API, enabling accurate monitoring of global COVID-19 trends and statistics. Implemented key features like interactive maps and data visualizations.`,
-    technologies: ["JavaScript", "API Integration", "Data Visualization", "Python"],
+    title: "Credit Udaan",
+    subtitle: "AI-Powered Credit Intelligence for India",
+    image: project1,
+    description: "Credit Udaan democratizes financial literacy by predicting credit scores with neural network precision and eliminating socioeconomic bias through fairness-optimized algorithms.",
+    features: [
+      "Engineered a PyTorch-based neural network achieving high-accuracy credit score predictions (300-900 range)",
+      "Implemented fairness optimization algorithms to minimize demographic and socioeconomic bias in predictions",
+      "Integrated OpenAI GPT-4o with Structured Outputs for generating step-by-step personalized financial improvement plans",
+      "Architected a responsive React frontend with TailwindCSS for seamless mobile-first user experiences",
+      "Deployed Flask REST APIs with robust input validation and error handling"
+    ],
+    techStack: ["PyTorch", "OpenAI GPT-4o", "Flask", "React", "TailwindCSS"],
+    deepDive: "The platform leverages a multi-layer perceptron (MLP) architecture trained on Indian credit bureau patterns, with custom loss functions incorporating fairness constraints to reduce bias.",
+    link: "https://github.com/krishkpatil/CreditUdaan"
   },
   {
-    title: "Crowdfunding Dapp based on Solana Blockchain",
-    image: project4, // Replace with actual image path
-    description: `Co-created a decentralized crowdfunding platform on the Solana blockchain, addressing challenges like transparency, security, and anti-fraud. Developed and maintained backend infrastructure using Rust and contributed to front-end development using React.js.`,
-    technologies: ["Solana", "Rust", "React.js", "Blockchain"],
+    title: "GetFlix Movie Discovery",
+    subtitle: "High-Performance Movie Discovery Engine",
+    image: project4,
+    description: "GetFlix delivers a blazing-fast, visually stunning movie discovery experience with zero framework overhead.",
+    features: [
+      "Architected a vanilla JavaScript application with optimized DOM manipulation for sub-100ms render times",
+      "Implemented real-time search filtering with debounced API calls to TMDb for efficient data fetching",
+      "Designed a responsive CSS architecture with native dark/light mode toggle using CSS custom properties",
+      "Built lazy-loading image optimization for improved Core Web Vitals and user experience",
+      "Engineered modular JavaScript patterns for scalability without framework dependencies"
+    ],
+    techStack: ["JavaScript (ES6+)", "TMDb API", "CSS3", "HTML5", "REST API"],
+    deepDive: "The application employs event delegation for efficient DOM event handling and uses the Intersection Observer API for lazy-loading movie posters.",
+    link: "https://github.com/krishkpatil/getflix"
+  }
+];
+
+export const CERTIFICATIONS = [
+  {
+    title: "Microsoft Certified: Azure Data Scientist Associate (DP-100)",
+    date: "June 2025",
+  },
+  {
+    title: "Microsoft Certified: Azure AI Engineer Associate (AI-102)",
+    date: "July 2025",
   },
 ];
 
-
 export const CONTACT = {
-  address: "Exeter, United Kingdom",
-  phoneNo: "+44 (0) 7774601784",
+  address: "Mumbai, India",
+  phoneNo: "+91 8779787558",
   email: "patilkkrish@gmail.com",
 };
