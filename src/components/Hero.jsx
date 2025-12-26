@@ -93,12 +93,12 @@ const Hero = () => {
   };
 
   return (
-    <div className="border-b border-neutral-900 pb-8 lg:mb-35 relative overflow-hidden">
+    <div className="border-b border-neutral-900 pb-4 lg:mb-35 relative overflow-hidden">
       <div className="flex flex-wrap items-center">
-        <div className="w-full lg:w-3/5 flex flex-col justify-start lg:justify-center pt-2 md:pt-10">
+        <div className="w-full lg:w-3/5 flex flex-col justify-start lg:justify-center pt-0 md:pt-10">
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
             <motion.h1
-              className="pb-2 text-5xl font-thin tracking-tight lg:mt-16 lg:text-8xl w-full"
+              className="pb-1 text-5xl font-thin tracking-tight lg:mt-16 lg:text-8xl w-full"
             >
               {"Krish Patil".split("").map((char, index) => (
                 <motion.span
@@ -119,7 +119,7 @@ const Hero = () => {
 
             <div
               ref={carouselRef}
-              className="relative w-full min-h-[280px] mt-0 touch-none cursor-grab active:cursor-grabbing"
+              className="relative w-full min-h-[260px] md:min-h-[280px] mt-0 touch-none cursor-grab active:cursor-grabbing"
             >
               <AnimatePresence initial={false} custom={direction} mode="wait">
                 <motion.div
@@ -146,13 +146,13 @@ const Hero = () => {
                   }}
                   className="absolute inset-0 flex flex-col items-center lg:items-start px-4 md:px-0"
                 >
-                  <p className="text-purple-400 font-bold uppercase tracking-[0.4em] text-[10px] md:text-xs mb-2">
+                  <p className="text-purple-400 font-bold uppercase tracking-[0.4em] text-[10px] md:text-xs mb-1">
                     {slides[currentIndex].label}
                   </p>
-                  <h2 className="bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-2xl md:text-3xl lg:text-5xl tracking-tight text-transparent font-medium mb-3 leading-tight min-h-[60px] md:min-h-0">
+                  <h2 className="bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-2xl md:text-3xl lg:text-5xl tracking-tight text-transparent font-medium mb-2 leading-tight min-h-[50px] md:min-h-0">
                     {slides[currentIndex].title}
                   </h2>
-                  <div className="max-w-xl font-light leading-relaxed text-neutral-400 text-sm md:text-lg lg:text-xl min-h-[120px]">
+                  <div className="max-w-xl font-light leading-relaxed text-neutral-400 text-xs sm:text-sm md:text-lg lg:text-xl min-h-[100px]">
                     {displayedContent}
                     {isTyping && <span className="inline-block w-2 h-4 ml-1 bg-purple-500 animate-pulse">|</span>}
                   </div>
@@ -160,7 +160,7 @@ const Hero = () => {
               </AnimatePresence>
             </div>
 
-            <div className="flex flex-col md:flex-row items-center justify-center lg:justify-start gap-4 mt-0 w-full mb-8">
+            <div className="flex flex-col md:flex-row items-center justify-center lg:justify-start gap-3 mt-0 w-full mb-6">
               <motion.div
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
@@ -201,10 +201,10 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 2, duration: 1 }}
-              className="w-full flex flex-col items-center justify-center mb-10 lg:hidden cursor-pointer"
+              className="w-full flex flex-col items-center justify-center mb-6 lg:hidden cursor-pointer"
               onClick={scrollToNext}
             >
-              <p className="text-neutral-500 text-[10px] uppercase tracking-[0.4em] mb-2 font-bold animate-pulse">Explore Work</p>
+              <p className="text-neutral-500 text-[10px] uppercase tracking-[0.4em] mb-1 font-bold animate-pulse">Explore Work</p>
               <motion.div
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
@@ -215,7 +215,7 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className="w-full lg:w-2/5 lg:p-8 flex justify-center lg:justify-end mt-4 lg:mt-0">
+        <div className="w-full lg:w-2/5 lg:p-8 flex justify-center lg:justify-end mt-2 lg:mt-0">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -223,7 +223,7 @@ const Hero = () => {
             className="relative"
           >
             <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 opacity-20 blur-3xl animate-pulse"></div>
-            <div className="relative w-56 h-56 lg:w-[450px] lg:h-[450px] rounded-full border-4 border-neutral-800 overflow-hidden shadow-2xl">
+            <div className="relative w-48 h-48 lg:w-[450px] lg:h-[450px] rounded-full border-4 border-neutral-800 overflow-hidden shadow-2xl">
               <img
                 src={profilePic}
                 alt="Krish Patil"

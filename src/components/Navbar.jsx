@@ -2,7 +2,7 @@ import { FaLinkedin, FaGithub, FaCode } from 'react-icons/fa';
 
 const Navbar = () => {
     return (
-        <nav className='mb-20 flex items-center justify-between py-6'>
+        <nav className='mb-12 lg:mb-20 flex items-center justify-between py-4 lg:py-6'>
             <div className='flex flex-shrink-0 items-center'>
                 <a href="/">
                     <FaCode className="mx-4 w-10 text-4xl" alt="logo" />
