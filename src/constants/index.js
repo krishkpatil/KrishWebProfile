@@ -6,7 +6,7 @@ import project5 from "../assets/projects/deffy_funds.png";
 
 const GAMING_CAFE_VIDEO = "https://private-user-images.githubusercontent.com/70696384/417813001-d5d4f21e-b091-4fe7-af9f-4773287756f8.mp4?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NjY3NjI1NzksIm5iZiI6MTc2Njc2MjI3OSwicGF0aCI6Ii83MDY5NjM4NC80MTc4MTMwMDEtZDVkNGYyMWUtYjA5MS00ZmU3LWFmOWYtNDc3MzI4Nzc1NmY4Lm1wND9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTEyMjYlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUxMjI2VDE1MTc1OVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWQ3Y2M5ZTQ1NWQ3ZGQ4NTRlMmM2MDRjY2M1NzhhMjRmNzQxN2UzMjQ0OTUzZDliMzc5MmUwZWViMGQ4OGY1MzQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.tJY5j6xHYDxttND_R3zeijRyZMGzRxkUIC9-iUtSh-w";
 
-export const HERO_CONTENT = `GenAI Engineer and Full-Stack AI/ML Developer with a Master's in Data Science from the University of Exeter. I specialize in building AI Agent monitoring platforms, HIPAA-compliant assistants, and real-time RAG systems. Passionate about leveraging cutting-edge AI to drive innovation and deliver impactful solutions.`;
+export const HERO_CONTENT = `I build production-grade AI systems that bridge the gap between complex research and scalable applications. Specializing in Generative AI, I architect intelligent agentic platforms and RAG-driven systems that solve real-world problems with mathematical precision and efficient full-stack engineering.`;
 
 export const EXPERIENCES = [
   {

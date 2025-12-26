@@ -1,102 +1,195 @@
-import { HERO_CONTENT } from "../constants";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import profilePic from "../assets/krish_profile.jpg";
 import resumePDF from "../assets/projects/Krish-Patil-GenAI-Engineer.pdf";
 
 const Hero = () => {
-  const titles = ["GenAI Engineer", "Full-Stack AI/ML Developer", "Data Scientist"];
-  const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
-  const [displayText, setDisplayText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
+  const slides = [
+    {
+      label: "The Engineer",
+      title: "GenAI Engineer | Full-Stack AI/ML Developer",
+      content: "Turning complex AI research into production-grade applications. I have successfully architected and deployed multi-agent RAG systems, HIPAA-compliant AI pipelines, and internal AI platforms for global enterprise stakeholders."
+    },
+    {
+      label: "The Researcher",
+      title: "Data Science & ML Foundations",
+      content: "Master’s in Data Science with AI (Merit) from the University of Exeter. Researched behavioral AI for data leak prevention, achieving a 40% reduction in exposure through NLP and real-time behavioral pattern analysis."
+    },
+    {
+      label: "The Vision",
+      title: "Architecting the Future of Agentic AI",
+      content: "I am actively engineering end-to-end LLM ecosystems, focusing on multi-agent observability and robust evaluation frameworks to ensure autonomous systems deliver reliable performance in high-stakes production environments."
+    }
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const [displayedContent, setDisplayedContent] = useState("");
+  const [isTyping, setIsTyping] = useState(true);
 
   useEffect(() => {
-    const currentFullTitle = titles[currentTitleIndex];
-    const timeout = setTimeout(() => {
-      if (!isDeleting) {
-        setDisplayText(currentFullTitle.slice(0, displayText.length + 1));
-        if (displayText === currentFullTitle) {
-          setTimeout(() => setIsDeleting(true), 2000);
-        }
-      } else {
-        setDisplayText(currentFullTitle.slice(0, displayText.length - 1));
-        if (displayText === "") {
-          setIsDeleting(false);
-          setCurrentTitleIndex((prev) => (prev + 1) % titles.length);
-        }
-      }
-    }, isDeleting ? 50 : 100);
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 10000);
+    return () => clearInterval(timer);
+  }, [currentIndex]);
 
-    return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, currentTitleIndex]);
+  useEffect(() => {
+    setDisplayedContent("");
+    setIsTyping(true);
+    let i = 0;
+    const fullText = slides[currentIndex].content;
+
+    const typingInterval = setInterval(() => {
+      if (i < fullText.length) {
+        setDisplayedContent(fullText.slice(0, i + 1));
+        i++;
+      } else {
+        setIsTyping(false);
+        clearInterval(typingInterval);
+      }
+    }, 15);
+
+    return () => clearInterval(typingInterval);
+  }, [currentIndex]);
+
+  const nextSlide = () => {
+    setDirection(1);
+    setCurrentIndex((prev) => (prev + 1) % slides.length);
+  };
+
+  const prevSlide = () => {
+    setDirection(-1);
+    setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const variants = {
+    enter: (direction) => ({
+      x: direction > 0 ? 100 : -100,
+      opacity: 0,
+      filter: "blur(10px)"
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+      filter: "blur(0px)"
+    },
+    exit: (direction) => ({
+      zIndex: 0,
+      x: direction < 0 ? 100 : -100,
+      opacity: 0,
+      filter: "blur(10px)"
+    })
+  };
 
   return (
-    <div className="border-b border-neutral-900 pb-16 lg:mb-35">
+    <div className="border-b border-neutral-900 pb-16 lg:mb-35 relative overflow-hidden">
       <div className="flex flex-wrap items-center">
-        <div className="w-full lg:w-1/2">
+        <div className="w-full lg:w-3/5 min-h-[550px] md:min-h-[500px] flex flex-col justify-start lg:justify-center lg:pt-0 pt-10">
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
             <motion.h1
-              initial={{ x: -100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0 }}
-              className="pb-6 text-6xl font-thin tracking-tight lg:mt-16 lg:text-8xl"
+              className="pb-8 text-5xl font-thin tracking-tight lg:mt-16 lg:text-8xl w-full"
             >
-              Krish Patil
+              {"Krish Patil".split("").map((char, index) => (
+                <motion.span
+                  key={index}
+                  initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
+                  animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+                  transition={{
+                    duration: 0.5,
+                    delay: index * 0.05,
+                    ease: "easeOut"
+                  }}
+                  className="inline-block"
+                >
+                  {char === " " ? "\u00A0" : char}
+                </motion.span>
+              ))}
             </motion.h1>
-            <motion.div
-              initial={{ x: -100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="h-12" // Set height to prevent layout shift
-            >
-              <span className="bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-3xl lg:text-4xl tracking-tight text-transparent font-medium">
-                {displayText}
-                <span className="animate-pulse text-purple-500">|</span>
-              </span>
-            </motion.div>
-            <motion.p
-              initial={{ x: -100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 1 }}
-              className="my-4 max-w-xl py-6 font-light leading-relaxed text-neutral-400"
-            >
-              {HERO_CONTENT}
-            </motion.p>
-            <motion.div
-              initial={{ x: -100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 1.5 }}
-            >
-              <a
-                href={resumePDF}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative inline-flex items-center justify-center overflow-hidden rounded-full p-0.5 font-bold"
+
+            <div className="relative w-full min-h-[350px] mt-2 px-4 md:px-0">
+              <AnimatePresence initial={false} custom={direction} mode="wait">
+                <motion.div
+                  key={currentIndex}
+                  custom={direction}
+                  variants={variants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{
+                    x: { type: "spring", stiffness: 300, damping: 30 },
+                    opacity: { duration: 0.4 }
+                  }}
+                  className="absolute inset-0 flex flex-col items-center lg:items-start"
+                >
+                  <p className="text-purple-400 font-bold uppercase tracking-[0.4em] text-[10px] md:text-xs mb-4">
+                    {slides[currentIndex].label}
+                  </p>
+                  <h2 className="bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-2xl md:text-3xl lg:text-5xl tracking-tight text-transparent font-medium mb-6 leading-tight min-h-[80px] md:min-h-0">
+                    {slides[currentIndex].title}
+                  </h2>
+                  <div className="max-w-xl font-light leading-relaxed text-neutral-400 text-base md:text-lg lg:text-xl min-h-[140px]">
+                    {displayedContent}
+                    {isTyping && <span className="inline-block w-2 h-5 ml-1 bg-purple-500 animate-pulse">|</span>}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-8 mt-10 w-full">
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5, delay: 1 }}
               >
-                <span className="absolute h-full w-full bg-gradient-to-br from-[#ff00c6] via-[#ff00c6] to-[#01fbff] group-hover:from-[#ff00c6] group-hover:via-[#ff00c6] group-hover:to-[#01fbff]"></span>
-                <span className="relative rounded-full bg-neutral-950 px-6 py-3 transition-all duration-200 ease-out group-hover:bg-opacity-0">
-                  <span className="relative bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-transparent group-hover:text-white">
-                    View CV
+                <a
+                  href={resumePDF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative inline-flex items-center justify-center overflow-hidden rounded-full p-0.5 font-bold"
+                >
+                  <span className="absolute h-full w-full bg-gradient-to-br from-[#ff00c6] via-[#ff00c6] to-[#01fbff]"></span>
+                  <span className="relative rounded-full bg-neutral-950 px-8 py-4 md:px-10 md:py-5 transition-all duration-200 ease-out group-hover:bg-opacity-0">
+                    <span className="relative bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-transparent group-hover:text-white text-base md:text-xl">
+                      View CV
+                    </span>
                   </span>
-                </span>
-              </a>
-            </motion.div>
+                </a>
+              </motion.div>
+
+              <div className="flex gap-4">
+                {slides.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      setDirection(index > currentIndex ? 1 : -1);
+                      setCurrentIndex(index);
+                    }}
+                    className={`h-2 rounded-full transition-all duration-500 ${currentIndex === index ? "w-10 bg-purple-500" : "w-2 bg-neutral-800"
+                      }`}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-        <div className="w-full lg:w-1/2 lg:p-8 flex justify-center lg:justify-end mt-12 lg:mt-0">
+
+        <div className="w-full lg:w-2/5 lg:p-8 flex justify-center lg:justify-end mt-12 lg:mt-0">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
+            transition={{ duration: 1, delay: 0.5 }}
             className="relative"
           >
-            <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 opacity-20 blur-2xl animate-pulse"></div>
-            <div className="relative w-64 h-64 lg:w-80 lg:h-80 rounded-full border-4 border-neutral-800 overflow-hidden shadow-2xl">
+            <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 opacity-20 blur-3xl animate-pulse"></div>
+            <div className="relative w-64 h-64 lg:w-[450px] lg:h-[450px] rounded-full border-4 border-neutral-800 overflow-hidden shadow-2xl">
               <img
                 src={profilePic}
                 alt="Krish Patil"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-all duration-700 ease-in-out"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/40 via-transparent to-transparent opacity-60"></div>
             </div>
           </motion.div>
         </div>
