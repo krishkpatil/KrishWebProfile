@@ -63,7 +63,7 @@ const Contact = () => {
         <div className="pt-8 border-t border-neutral-800/50 flex flex-col md:flex-row justify-between items-center gap-4 text-neutral-500 text-sm">
           <p>© 2025 Krish Patil. All rights reserved.</p>
           <p className="flex items-center gap-2">
-            Built with <span className="text-pink-500">❤️</span> using React & Tailwind
+            Built using React & Tailwind
           </p>
         </div>
       </motion.div>
