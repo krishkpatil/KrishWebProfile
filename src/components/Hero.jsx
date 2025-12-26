@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import profilePic from "../assets/krish_profile.jpg";
 import resumePDF from "../assets/projects/Krish-Patil-GenAI-Engineer.pdf";
 
@@ -26,11 +26,12 @@ const Hero = () => {
   const [direction, setDirection] = useState(0);
   const [displayedContent, setDisplayedContent] = useState("");
   const [isTyping, setIsTyping] = useState(true);
+  const carouselRef = useRef(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
       nextSlide();
-    }, 10000);
+    }, 12000);
     return () => clearInterval(timer);
   }, [currentIndex]);
 
@@ -65,7 +66,7 @@ const Hero = () => {
 
   const variants = {
     enter: (direction) => ({
-      x: direction > 0 ? 100 : -100,
+      x: direction > 0 ? "100%" : "-100%",
       opacity: 0,
       filter: "blur(10px)"
     }),
@@ -77,24 +78,25 @@ const Hero = () => {
     },
     exit: (direction) => ({
       zIndex: 0,
-      x: direction < 0 ? 100 : -100,
+      x: direction < 0 ? "100%" : "-100%",
       opacity: 0,
       filter: "blur(10px)"
     })
   };
 
   return (
-    <div className="border-b border-neutral-900 pb-16 lg:mb-35 relative overflow-hidden">
+    <div className="border-b border-neutral-900 pb-8 lg:mb-35 relative overflow-hidden">
       <div className="flex flex-wrap items-center">
-        <div className="w-full lg:w-3/5 min-h-[550px] md:min-h-[500px] flex flex-col justify-start lg:justify-center lg:pt-0 pt-10">
+        {/* Navigation/Social is handled by Navbar, so we focus on tight Hero spacing */}
+        <div className="w-full lg:w-3/5 min-h-[500px] md:min-h-[500px] flex flex-col justify-start lg:justify-center pt-2 md:pt-10">
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
             <motion.h1
-              className="pb-8 text-5xl font-thin tracking-tight lg:mt-16 lg:text-8xl w-full"
+              className="pb-4 text-5xl font-thin tracking-tight lg:mt-16 lg:text-8xl w-full"
             >
               {"Krish Patil".split("").map((char, index) => (
                 <motion.span
                   key={index}
-                  initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
+                  initial={{ opacity: 0, filter: "blur(10px)", y: 10 }}
                   animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
                   transition={{
                     duration: 0.5,
@@ -108,7 +110,10 @@ const Hero = () => {
               ))}
             </motion.h1>
 
-            <div className="relative w-full min-h-[350px] mt-2 px-4 md:px-0">
+            <div
+              ref={carouselRef}
+              className="relative w-full min-h-[300px] mt-1 touch-none cursor-grab active:cursor-grabbing"
+            >
               <AnimatePresence initial={false} custom={direction} mode="wait">
                 <motion.div
                   key={currentIndex}
@@ -121,23 +126,34 @@ const Hero = () => {
                     x: { type: "spring", stiffness: 300, damping: 30 },
                     opacity: { duration: 0.4 }
                   }}
-                  className="absolute inset-0 flex flex-col items-center lg:items-start"
+                  drag="x"
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.8}
+                  onDragEnd={(e, { offset, velocity }) => {
+                    const swipeThreshold = 50;
+                    if (offset.x > swipeThreshold) {
+                      prevSlide();
+                    } else if (offset.x < -swipeThreshold) {
+                      nextSlide();
+                    }
+                  }}
+                  className="absolute inset-0 flex flex-col items-center lg:items-start px-4 md:px-0"
                 >
-                  <p className="text-purple-400 font-bold uppercase tracking-[0.4em] text-[10px] md:text-xs mb-4">
+                  <p className="text-purple-400 font-bold uppercase tracking-[0.4em] text-[10px] md:text-xs mb-3">
                     {slides[currentIndex].label}
                   </p>
-                  <h2 className="bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-2xl md:text-3xl lg:text-5xl tracking-tight text-transparent font-medium mb-6 leading-tight min-h-[80px] md:min-h-0">
+                  <h2 className="bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-2xl md:text-3xl lg:text-5xl tracking-tight text-transparent font-medium mb-4 leading-tight min-h-[60px] md:min-h-0">
                     {slides[currentIndex].title}
                   </h2>
-                  <div className="max-w-xl font-light leading-relaxed text-neutral-400 text-base md:text-lg lg:text-xl min-h-[140px]">
+                  <div className="max-w-xl font-light leading-relaxed text-neutral-400 text-sm md:text-lg lg:text-xl min-h-[140px]">
                     {displayedContent}
-                    {isTyping && <span className="inline-block w-2 h-5 ml-1 bg-purple-500 animate-pulse">|</span>}
+                    {isTyping && <span className="inline-block w-2 h-4 ml-1 bg-purple-500 animate-pulse">|</span>}
                   </div>
                 </motion.div>
               </AnimatePresence>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-8 mt-10 w-full">
+            <div className="flex flex-col md:flex-row items-center justify-center lg:justify-start gap-6 mt-4 w-full">
               <motion.div
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
@@ -150,15 +166,15 @@ const Hero = () => {
                   className="group relative inline-flex items-center justify-center overflow-hidden rounded-full p-0.5 font-bold"
                 >
                   <span className="absolute h-full w-full bg-gradient-to-br from-[#ff00c6] via-[#ff00c6] to-[#01fbff]"></span>
-                  <span className="relative rounded-full bg-neutral-950 px-8 py-4 md:px-10 md:py-5 transition-all duration-200 ease-out group-hover:bg-opacity-0">
-                    <span className="relative bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-transparent group-hover:text-white text-base md:text-xl">
+                  <span className="relative rounded-full bg-neutral-950 px-8 py-3 transition-all duration-200 ease-out group-hover:bg-opacity-0">
+                    <span className="relative bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-transparent group-hover:text-white text-base md:text-lg">
                       View CV
                     </span>
                   </span>
                 </a>
               </motion.div>
 
-              <div className="flex gap-4">
+              <div className="flex gap-3">
                 {slides.map((_, index) => (
                   <button
                     key={index}
@@ -166,7 +182,7 @@ const Hero = () => {
                       setDirection(index > currentIndex ? 1 : -1);
                       setCurrentIndex(index);
                     }}
-                    className={`h-2 rounded-full transition-all duration-500 ${currentIndex === index ? "w-10 bg-purple-500" : "w-2 bg-neutral-800"
+                    className={`h-1.5 rounded-full transition-all duration-500 ${currentIndex === index ? "w-8 bg-purple-500" : "w-1.5 bg-neutral-800"
                       }`}
                   />
                 ))}
@@ -175,7 +191,7 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className="w-full lg:w-2/5 lg:p-8 flex justify-center lg:justify-end mt-12 lg:mt-0">
+        <div className="w-full lg:w-2/5 lg:p-8 flex justify-center lg:justify-end mt-8 lg:mt-0">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -183,7 +199,7 @@ const Hero = () => {
             className="relative"
           >
             <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 opacity-20 blur-3xl animate-pulse"></div>
-            <div className="relative w-64 h-64 lg:w-[450px] lg:h-[450px] rounded-full border-4 border-neutral-800 overflow-hidden shadow-2xl">
+            <div className="relative w-56 h-56 lg:w-[450px] lg:h-[450px] rounded-full border-4 border-neutral-800 overflow-hidden shadow-2xl">
               <img
                 src={profilePic}
                 alt="Krish Patil"
