@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import profilePic from "../assets/krish_profile.jpg";
 import resumePDF from "../assets/projects/Krish-Patil-GenAI-Engineer.pdf";
+import { FaChevronDown } from "react-icons/fa";
 
 const Hero = () => {
   const slides = [
@@ -64,6 +65,13 @@ const Hero = () => {
     setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
+  const scrollToNext = () => {
+    window.scrollTo({
+      top: window.innerHeight * 0.9,
+      behavior: 'smooth'
+    });
+  };
+
   const variants = {
     enter: (direction) => ({
       x: direction > 0 ? "100%" : "-100%",
@@ -87,11 +95,10 @@ const Hero = () => {
   return (
     <div className="border-b border-neutral-900 pb-8 lg:mb-35 relative overflow-hidden">
       <div className="flex flex-wrap items-center">
-        {/* Navigation/Social is handled by Navbar, so we focus on tight Hero spacing */}
-        <div className="w-full lg:w-3/5 min-h-[500px] md:min-h-[500px] flex flex-col justify-start lg:justify-center pt-2 md:pt-10">
+        <div className="w-full lg:w-3/5 flex flex-col justify-start lg:justify-center pt-2 md:pt-10">
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
             <motion.h1
-              className="pb-4 text-5xl font-thin tracking-tight lg:mt-16 lg:text-8xl w-full"
+              className="pb-2 text-5xl font-thin tracking-tight lg:mt-16 lg:text-8xl w-full"
             >
               {"Krish Patil".split("").map((char, index) => (
                 <motion.span
@@ -112,7 +119,7 @@ const Hero = () => {
 
             <div
               ref={carouselRef}
-              className="relative w-full min-h-[300px] mt-1 touch-none cursor-grab active:cursor-grabbing"
+              className="relative w-full min-h-[280px] mt-0 touch-none cursor-grab active:cursor-grabbing"
             >
               <AnimatePresence initial={false} custom={direction} mode="wait">
                 <motion.div
@@ -139,13 +146,13 @@ const Hero = () => {
                   }}
                   className="absolute inset-0 flex flex-col items-center lg:items-start px-4 md:px-0"
                 >
-                  <p className="text-purple-400 font-bold uppercase tracking-[0.4em] text-[10px] md:text-xs mb-3">
+                  <p className="text-purple-400 font-bold uppercase tracking-[0.4em] text-[10px] md:text-xs mb-2">
                     {slides[currentIndex].label}
                   </p>
-                  <h2 className="bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-2xl md:text-3xl lg:text-5xl tracking-tight text-transparent font-medium mb-4 leading-tight min-h-[60px] md:min-h-0">
+                  <h2 className="bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-2xl md:text-3xl lg:text-5xl tracking-tight text-transparent font-medium mb-3 leading-tight min-h-[60px] md:min-h-0">
                     {slides[currentIndex].title}
                   </h2>
-                  <div className="max-w-xl font-light leading-relaxed text-neutral-400 text-sm md:text-lg lg:text-xl min-h-[140px]">
+                  <div className="max-w-xl font-light leading-relaxed text-neutral-400 text-sm md:text-lg lg:text-xl min-h-[120px]">
                     {displayedContent}
                     {isTyping && <span className="inline-block w-2 h-4 ml-1 bg-purple-500 animate-pulse">|</span>}
                   </div>
@@ -153,7 +160,7 @@ const Hero = () => {
               </AnimatePresence>
             </div>
 
-            <div className="flex flex-col md:flex-row items-center justify-center lg:justify-start gap-6 mt-4 w-full">
+            <div className="flex flex-col md:flex-row items-center justify-center lg:justify-start gap-4 mt-0 w-full mb-8">
               <motion.div
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
@@ -166,7 +173,7 @@ const Hero = () => {
                   className="group relative inline-flex items-center justify-center overflow-hidden rounded-full p-0.5 font-bold"
                 >
                   <span className="absolute h-full w-full bg-gradient-to-br from-[#ff00c6] via-[#ff00c6] to-[#01fbff]"></span>
-                  <span className="relative rounded-full bg-neutral-950 px-8 py-3 transition-all duration-200 ease-out group-hover:bg-opacity-0">
+                  <span className="relative rounded-full bg-neutral-950 px-8 py-2.5 transition-all duration-200 ease-out group-hover:bg-opacity-0">
                     <span className="relative bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-transparent group-hover:text-white text-base md:text-lg">
                       View CV
                     </span>
@@ -188,10 +195,27 @@ const Hero = () => {
                 ))}
               </div>
             </div>
+
+            {/* Mobile Scroll Indicator - Positioned above the profile picture */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 2, duration: 1 }}
+              className="w-full flex flex-col items-center justify-center mb-10 lg:hidden cursor-pointer"
+              onClick={scrollToNext}
+            >
+              <p className="text-neutral-500 text-[10px] uppercase tracking-[0.4em] mb-2 font-bold animate-pulse">Explore Work</p>
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <FaChevronDown className="text-purple-500 text-lg opacity-80" />
+              </motion.div>
+            </motion.div>
           </div>
         </div>
 
-        <div className="w-full lg:w-2/5 lg:p-8 flex justify-center lg:justify-end mt-8 lg:mt-0">
+        <div className="w-full lg:w-2/5 lg:p-8 flex justify-center lg:justify-end mt-4 lg:mt-0">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
