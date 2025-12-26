@@ -98,7 +98,7 @@ const Hero = () => {
         <div className="w-full lg:w-3/5 flex flex-col justify-start lg:justify-center pt-0 md:pt-10">
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
             <motion.h1
-              className="pb-1 text-5xl font-thin tracking-tight lg:mt-16 lg:text-8xl w-full"
+              className="pb-6 text-5xl font-thin tracking-tight lg:mt-16 lg:text-8xl w-full"
             >
               {"Krish Patil".split("").map((char, index) => (
                 <motion.span
@@ -119,7 +119,7 @@ const Hero = () => {
 
             <div
               ref={carouselRef}
-              className="relative w-full min-h-[260px] md:min-h-[280px] mt-0 touch-none cursor-grab active:cursor-grabbing"
+              className="relative w-full min-h-[220px] md:min-h-[280px] mt-2 touch-none cursor-grab active:cursor-grabbing"
             >
               <AnimatePresence initial={false} custom={direction} mode="wait">
                 <motion.div
@@ -152,7 +152,7 @@ const Hero = () => {
                   <h2 className="bg-gradient-to-r from-pink-300 via-slate-500 to-purple-500 bg-clip-text text-2xl md:text-3xl lg:text-5xl tracking-tight text-transparent font-medium mb-2 leading-tight min-h-[50px] md:min-h-0">
                     {slides[currentIndex].title}
                   </h2>
-                  <div className="max-w-xl font-light leading-relaxed text-neutral-400 text-xs sm:text-sm md:text-lg lg:text-xl min-h-[100px]">
+                  <div className="max-w-xl font-light leading-relaxed text-neutral-400 text-xs sm:text-sm md:text-lg lg:text-xl min-h-[90px]">
                     {displayedContent}
                     {isTyping && <span className="inline-block w-2 h-4 ml-1 bg-purple-500 animate-pulse">|</span>}
                   </div>
@@ -160,11 +160,28 @@ const Hero = () => {
               </AnimatePresence>
             </div>
 
-            <div className="flex flex-col md:flex-row items-center justify-center lg:justify-start gap-3 mt-0 w-full mb-6">
+            <div className="flex flex-col items-center lg:items-start w-full mt-4">
+              {/* Carousel Dots - Now ABOVE the View CV button */}
+              <div className="flex gap-3 mb-6">
+                {slides.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      setDirection(index > currentIndex ? 1 : -1);
+                      setCurrentIndex(index);
+                    }}
+                    className={`h-1.5 rounded-full transition-all duration-500 ${currentIndex === index ? "w-8 bg-purple-500" : "w-1.5 bg-neutral-800"
+                      }`}
+                  />
+                ))}
+              </div>
+
+              {/* View CV Button */}
               <motion.div
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.5, delay: 1 }}
+                className="mb-8"
               >
                 <a
                   href={resumePDF}
@@ -180,20 +197,6 @@ const Hero = () => {
                   </span>
                 </a>
               </motion.div>
-
-              <div className="flex gap-3">
-                {slides.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => {
-                      setDirection(index > currentIndex ? 1 : -1);
-                      setCurrentIndex(index);
-                    }}
-                    className={`h-1.5 rounded-full transition-all duration-500 ${currentIndex === index ? "w-8 bg-purple-500" : "w-1.5 bg-neutral-800"
-                      }`}
-                  />
-                ))}
-              </div>
             </div>
 
             {/* Mobile Scroll Indicator - Positioned above the profile picture */}
@@ -201,7 +204,7 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 2, duration: 1 }}
-              className="w-full flex flex-col items-center justify-center mb-6 lg:hidden cursor-pointer"
+              className="w-full flex flex-col items-center justify-center mb-10 lg:hidden cursor-pointer"
               onClick={scrollToNext}
             >
               <p className="text-neutral-500 text-[10px] uppercase tracking-[0.4em] mb-1 font-bold animate-pulse">Explore Work</p>
@@ -215,7 +218,7 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className="w-full lg:w-2/5 lg:p-8 flex justify-center lg:justify-end mt-2 lg:mt-0">
+        <div className="w-full lg:w-2/5 lg:p-8 flex justify-center lg:justify-end mt-12 lg:mt-0 pb-10">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
